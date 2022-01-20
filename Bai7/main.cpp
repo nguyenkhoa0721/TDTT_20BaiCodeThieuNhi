@@ -1,31 +1,11 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <fstream>
+#include <bits/stdc++.h>
 using namespace std;
+#define MAXN 5 + int(1e3)
 
-int n;
-int *a;
-int *b;
-
-void readData()
-{
-    fstream f;
-    f.open("./input.txt", ios::in);
-    f >> n;
-    a = new int[n];
-    b = new int[n];
-    for (size_t i = 0; i < n; i++)
-        f >> a[i];
-
-    for (size_t i = 0; i < n; i++)
-        f >> b[i];
-
-    f.close();
-}
+int n, a[MAXN], b[MAXN], dp[MAXN][MAXN];
 
 // 2^n
-
 int lcsRecursion(int m, int n)
 {
     if (m == -1 || n == -1)
@@ -37,11 +17,8 @@ int lcsRecursion(int m, int n)
 }
 
 // n^2
-
 int lcsDP()
 {
-    int dp[n + 1][n + 1];
-
     for (int i = 0; i <= n; i++)
     {
         for (int j = 0; j <= n; j++)
@@ -58,8 +35,14 @@ int lcsDP()
 }
 int main()
 {
-    readData();
+    // freopen("input.txt", "r", stdin);
+    cin >> n;
+    for (size_t i = 0; i < n; i++)
+        cin >> a[i];
+
+    for (size_t i = 0; i < n; i++)
+        cin >> b[i];
     // cout << "output: " << lcsRecursion(n - 1, n - 1);
-    cout << "output: " << lcsDP();
+    cout << lcsDP();
     return 0;
 }
