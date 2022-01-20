@@ -1,29 +1,19 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-#define MAX 1e6
-#define ll long long
-#define pii pair<int, int>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-void solution(){
-    ll n, m, k;
-    cin >> n >> m >> k;
-    if (k>n*m){
-        return;
-    }
-    if (k < n+m -1){
-        cout<<1;
-    }else{
-        
-    }
-}
+const int MAXN = 1e2;
 
-int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    solution();
-    return 0;
+int n, m, k, c;
+int a[MAXN + 5];
+int main()
+{
+    freopen("input.inp", "r", stdin);
+    freopen("output.out", "w", stdout);
+
+    cin >> n >> m >> k;
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= m; j++)
+            a[c++] = i * i + j * j;
+    sort(a, a + c);
+    cout << a[k - 1];
 }
