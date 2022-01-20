@@ -1,69 +1,58 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-#define MAX 1e3
-#define ll long long
-#define pii pair<int, int>
-
+#include <bits/stdc++.h>
 using namespace std;
-vector<int> primeNumbers;
-bool isPrime(int n)
+
+const long long MAX = 1e3;
+#define ll long long
+int n;
+int c;
+int res;
+bool isPrime[MAX + 5];
+int prime[MAX + 5];
+
+void sieve(int N)
 {
-    // Corner cases
-    if (n <= 1)
-        return false;
-    for (int i: primeNumbers){
-        if ( n%i == 0 ) {
-            return false;
+    bool isPrime[N + 1];
+    for (int i = 0; i <= N; ++i)
+    {
+        isPrime[i] = true;
+    }
+    isPrime[0] = false;
+    isPrime[1] = false;
+    for (int i = 2; i * i <= N; ++i)
+    {
+        if (isPrime[i] == true)
+        {
+            for (int j = i * i; j <= N; j += i)
+                isPrime[j] = false;
         }
     }
-    return true;
-}
-
-void buildPrimeArray(int n = MAX){
-    for(int i =1; i< 2*n; ++i){
-        if(isPrime(i)){
-            primeNumbers.push_back(i);
+    for (int i = 0; i <= N; i++)
+    {
+        if (isPrime[i])
+        {
+            prime[c++] = i;
         }
     }
 }
 
-ll g(int n){
-    if (n==2){
-        return 1; //g(2)
-    }else{
-        ll res = 0;
-        for(int i=0; i< n; ++i){
-            for(int j=i; j<n; ++j){
-                if(primeNumbers[i] + primeNumbers[j]==2*n){
-                    // printf("[%d,%d] ",primeNumbers[i], primeNumbers[j]);
-                    ++res;
-                }
+int main()
+{
+    freopen("input.inp", "r", stdin);
+    freopen("output.out", "w", stdout);
+
+    cin >> n;
+    sieve(2*n);
+    for (int i = 0; i < c; i++)
+        for (int j = i; j < c; j++)
+        {
+            int sum = prime[i] + prime[j];
+            if (sum % 2 == 0)
+            {
+                if (sum <= 2 * n)
+                    res++;
+                else
+                    break;
             }
         }
-        return res;
-    }
-}
-
-ll f(int n){
-    if (n==2){
-        return 1; //f(2)=g(2)=2+2
-    }else{
-        return f(n-1)+g(n);
-    }
-}
-
-void solution(){
-    int n;
-    cin >> n;
-    buildPrimeArray(2*n);
-    cout << f(n);
-}
-
-int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    solution();
-    return 0;
+    cout << res;
 }
