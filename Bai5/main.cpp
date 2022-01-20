@@ -1,98 +1,52 @@
-#include <iostream>
-#include <fstream>
-#include <math.h>
-#include <iomanip>
-#include <map>
-#include <iterator>
-
+#include<bits/stdc++.h>
 using namespace std;
-
-void initialGraph(int **graph, int count)
+int n,m,k;
+const long long base=round(1e9)+7;
+struct matran
 {
-    for (size_t i = 0; i < count; i++)
-    {
-        for (size_t j = 0; j < count; j++)
-        {
-            graph[i][j] = 0;
+    int a[55][55];
+};
+matran nhanmatran(matran a, matran b){
+    matran tmp;
+    for (int i=1;i<=n;++i){
+        for (int j=1;j<=n;++j){
+            tmp.a[i][j]=0;
         }
     }
-}
-void readData(int &n, int &m, int &k, int **graph, map<int, int> q)
-{
-    fstream f;
-    f.open("./input.txt", ios::in);
-    f >> n >> m >> k;
-    int u, v, nQue;
-    graph = new int *[n];
-    for (size_t i = 0; i < n; i++)
-    {
-        graph[i] = new int[n];
-    }
-    initialGraph(graph, n);
-    for (size_t i = 0; i < m; i++)
-    {
-        f >> u >> v;
-        graph[u][v] += 1;
-    }
-    f >> nQue;
-    for (size_t i = 0; i < nQue; i++)
-    {
-        f >> u >> v;
-        q.insert(pair<int, int>(u, v));
-    }
-
-    f.close();
-}
-
-void multiply(int **a, int **b, int n)
-{
-    // Creating an auxiliary matrix to store elements
-    // of the multiplication matrix
-    int mul[100][100];
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            mul[i][j] = 0;
-            for (int k = 0; k < n; k++)
-                mul[i][j] += a[i][k] * b[k][j];
+    for (int i=1;i<=n;++i){
+        for (int j=1;j<=n;++j){
+            for (int k=1;k<=n;++k){
+                tmp.a[i][j]+=a.a[i][k]*b.a[k][j];
+                tmp.a[i][j]%=base;
+            }
         }
     }
-
-    // Storing the multiplication result in a[][]
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++)
-            a[i][j] = mul[i][j]; //Updating our matrix
+    return tmp;
 }
-void printMatrix(int **a, int n)
-{
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-
-            cout << "    " << a[i][j];
-        }
-
-        cout << endl;
+matran mu(matran a,long long b){
+    if (b==1){
+        return a;
     }
-    cout << endl;
+    long long tmp=b/2;
+    matran x=mu(a,b/2);
+    x=nhanmatran(x,x);
+    if (b%2==0) return x;
+    else return nhanmatran(x,a);
 }
-int main()
-{
-    int **Graph;
-    int nVers, nEdges, nEdgesQueries;
-    map<int, int> Queries;
-    readData(nVers, nEdges, nEdgesQueries, Graph, Queries);
-    //cout << Queries.size();
-    for (size_t i = 0; i < nEdgesQueries - 1; i++)
-    {
-        multiply(Graph, Graph, nVers);
+int main(){
+    cin>>n>>m>>k;
+    matran coban;
+    for (int i=1;i<=m;++i){
+        int u,v;
+        cin>>u>>v;
+        coban.a[u][v]++;
     }
-    map<int, int>::iterator itr;
-    for (itr = Queries.begin(); itr != Queries.end(); ++itr)
-    {
-        cout << Graph[itr->first][itr->second] << '\n';
+    matran res=mu(coban,k);
+    int q;
+    cin>>q;
+    for (int i=1;i<=q;++i){
+        int u,v;
+        cin>>u>>v;
+        cout<<res.a[u][v]<<"\n";
     }
-    return 1;
 }

@@ -1,54 +1,37 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-#define MAX 1e3
-#define ll long long
-#define pii pair<int, int>
-
+#include <bits/stdc++.h>
 using namespace std;
-vector<int> initArray;
 
-ll g(int n){
-    if (n==1){
-        return 0;
-    }else{
-        ll res = 0;
-        for(int i=0; i< n; ++i){
-            // find n-arr[i] in i+1 -> n
-            for(int j=i+1; j<n; ++j){
-                if(initArray[i] + initArray[j]==n){
-                    // printf("[%d,%d] ",primeNumbers[i], primeNumbers[j]);
-                    ++res;
-                }
-            }
-        }
-        return res;
+const int MAXN = 10e3;
+const int MAXX = 10e6;
+int minn = MAXX, maxx = -MAXX;
+int a[MAXN + 5], n, m;
+int tmp = 0;
+int chatNhiPhan(int l, int r)
+{
+    if (l > r)
+    {
+        return tmp;
+    }
+    int mid = (l + r) / 2;
+    if (a[mid] + a[mid - 1] <= m)
+    {
+        tmp = (mid + 1) * (mid);
+        chatNhiPhan(mid + 1, r);
+    }
+    else
+    {
+        chatNhiPhan(l, mid - 1);
     }
 }
-
-ll f(int n){
-    if (n==1){
-        return 0;
-    }else{
-        return f(n-1)+g(n);
-    }
-}
-
-void solution(){
-    int n, m;
+int main()
+{
+    freopen("input.inp", "r", stdin);
+    freopen("output.out", "w", stdout);
     cin >> n >> m;
-    int x;
-    for (int i=0; i<n; ++i){
-        cin >> x;
-        initArray.push_back(x);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
     }
-    cout << f(m);
-}
-
-int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    solution();
-    return 0;
+    sort(a, a + n);
+    cout << chatNhiPhan(0, n);
 }
