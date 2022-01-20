@@ -25,7 +25,7 @@ void sol(int prev, int step)
             flag = true;
             break;
         }
-    if (step > n * 2 + 1)
+    if (step > n * 2 - 2)
     {
         return;
     }
@@ -57,7 +57,7 @@ int main()
     {
         cin >> a[i];
     }
-    res = n * 2 + 1;
+    res = n * 2 - 2;
     sol(-1, 0);
     cout << res;
 }

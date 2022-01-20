@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n, m, k;
-const long long base = round(1e9) + 7;
+const long long base = 1e9 + 7;
 struct matran
 {
     int a[55][55];
