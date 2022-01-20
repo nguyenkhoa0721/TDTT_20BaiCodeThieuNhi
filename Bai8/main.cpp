@@ -1,44 +1,22 @@
-#include <iostream>
-#include <fstream>
-#include <climits>
+#include <bits/stdc++.h>
 using namespace std;
 
 #define ll long long
-
+#define MAXN 200 + 10
 int n;
 int M;
-int *a;
-ll dp[200][200];
-
-void readData()
-{
-    fstream f;
-    f.open("./input.txt", ios::in);
-    f >> n >> M;
-    a = new int[n];
-    for (size_t i = 0; i < n; i++)
-        f >> a[i];
-
-    f.close();
-}
+int a[MAXN], prefixSum[MAXN];
+ll dp[MAXN][MAXN];
 
 ll sum(int i, int j)
 {
-    ll res = 0;
-    for (int k = i; k <= j; k++)
-    {
-        res += a[k];
-        res %= M;
-        }
-    return res;
+    return (prefixSum[j]-prefixSum[i]) % M;
 }
 
 ll solve(int i, int j)
 {
-    // base case
     if (i >= j)
         return 0;
-    // check if already calculated
     if (dp[i][j] != -1)
         return dp[i][j];
 
@@ -51,13 +29,20 @@ ll solve(int i, int j)
 }
 int main()
 {
-    readData();
-
-    // init dp
+    // freopen("input.txt", "r", stdin);
+    cin >> n >> M;
+    for (size_t i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    prefixSum[0] = a[0];
+    for (int i = 1; i < n; ++i)
+    {
+        prefixSum[i] = prefixSum[i - 1] + a[i];
+    }
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             dp[i][j] = -1;
-
-    cout << "output: " << solve(0, n - 1);
+    cout << solve(0, n - 1);
     return 0;
 }
