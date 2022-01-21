@@ -28,9 +28,8 @@ void check_data(vb &check, vector<cluster> arr, int &index, int &remain)
 
 int main()
 {
-    // space complexity: O(n)
-    // time complexity: O(nlog(n))
-    // freopen("input.txt", "r", stdin);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 
     int k, m, n;
     cin >> k >> n >> m;
@@ -76,7 +75,6 @@ int main()
             }
         }
     }
-    cout << "\nResult:\n";
     cout << ans;
     return 0;
 }

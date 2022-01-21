@@ -27,9 +27,8 @@ struct compare_pii
 
 int main()
 {
-    // space complexity: O(n)
-    // time complexity: O(nlog(n))
-    // freopen("input.txt", "r", stdin);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 
     int n, max_layer = 0;
     cin >> n;
@@ -49,7 +48,6 @@ int main()
         max_layer = max(max_layer, cnt_layer[i]);
     }
 
-    cout << "\nResult:\n";
     cout << max_layer << endl;
 
     sort(segments.begin(), segments.end(), compare);

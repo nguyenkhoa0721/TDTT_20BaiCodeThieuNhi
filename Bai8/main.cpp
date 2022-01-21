@@ -3,14 +3,13 @@ using namespace std;
 
 #define ll long long
 #define MAXN 200 + 10
-int n;
-int M;
-int a[MAXN], prefixSum[MAXN];
+int n, M, a[MAXN];
+ll prefixSum[MAXN];
 ll dp[MAXN][MAXN];
 
 ll sum(int i, int j)
 {
-    return (prefixSum[j]-prefixSum[i]) % M;
+    return (prefixSum[j] - prefixSum[i] + a[i]) % M;
 }
 
 ll solve(int i, int j)
@@ -29,7 +28,8 @@ ll solve(int i, int j)
 }
 int main()
 {
-    // freopen("input.txt", "r", stdin);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     cin >> n >> M;
     for (size_t i = 0; i < n; i++)
     {

@@ -35,7 +35,8 @@ int lcsDP()
 }
 int main()
 {
-    // freopen("input.txt", "r", stdin);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     cin >> n;
     for (size_t i = 0; i < n; i++)
         cin >> a[i];

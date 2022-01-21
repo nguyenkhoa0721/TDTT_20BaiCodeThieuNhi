@@ -53,7 +53,8 @@ int main()
 {
     // space complexity: O(n)
     // time complexity: O(k^(m+n) * (m+n)^n)
-    // freopen("input.txt", "r", stdin);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 
     cin >> k >> n >> m;
     for (int i = 0; i < k; ++i)
@@ -64,7 +65,6 @@ int main()
     vpii chosen_data;
     backtracking(visited, chosen_data, 0);
 
-    cout << "\nResult:\n";
     cout << ans;
     return 0;
 }
