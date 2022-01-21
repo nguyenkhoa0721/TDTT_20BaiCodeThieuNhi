@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <queue>
-#include <fstream>
+#include <bits/stdc++.h>
 
 #define MAX (1e6 + 2)
 #define pii pair<int, int>
