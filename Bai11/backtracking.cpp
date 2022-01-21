@@ -9,7 +9,7 @@ using namespace std;
 int k, m, n, ans;
 vpii data(1e3);
 
-void divide_cluster(vpii chosen_data, vb &check, int i)
+void split(vpii chosen_data, vb &check, int i)
 {
     if (i == n)
     {
@@ -23,7 +23,7 @@ void divide_cluster(vpii chosen_data, vb &check, int i)
         if (!check[j])
         {
             check[j] = true;
-            divide_cluster(chosen_data, check, i + 1);
+            split(chosen_data, check, i + 1);
             check[j] = false;
         }
 }
@@ -33,7 +33,7 @@ void backtracking(vb &visited, vpii &chosen_data, int i)
     if (i >= m + n)
     {
         vb check(m + n, false);
-        divide_cluster(chosen_data, check, 0);
+        split(chosen_data, check, 0);
         return;
     }
     for (int j = 0; j < k; ++j)

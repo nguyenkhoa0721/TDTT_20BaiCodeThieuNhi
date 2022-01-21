@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <fstream>
-
+#include <bits/stdc++.h>
 #define vb vector<bool>
 
 using namespace std;
@@ -34,23 +30,15 @@ int main()
 {
     // space complexity: O(n)
     // time complexity: O(nlog(n))
-
-    ifstream file;
-    file.open("input.txt");
-
-    if (!file.is_open())
-    {
-        cout << "File not found!" << endl;
-        return 0;
-    }
+    // freopen("input.txt", "r", stdin);
 
     int k, m, n;
-    file >> k >> n >> m;
+    cin >> k >> n >> m;
     vector<cluster> cluster_a, cluster_b;
     for (int i = 0; i < k; ++i)
     {
         cluster temp;
-        file >> temp.a >> temp.b;
+        cin >> temp.a >> temp.b;
         temp.id = i;
         cluster_a.push_back(temp);
         cluster_b.push_back(temp);
