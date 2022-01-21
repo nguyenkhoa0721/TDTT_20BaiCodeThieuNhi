@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <fstream>
+#include <bits/stdc++.h>
 
 #define vb vector<bool>
 #define pii pair<int, int>
@@ -55,18 +53,11 @@ int main()
 {
     // space complexity: O(n)
     // time complexity: O(k^(m+n) * (m+n)^n)
-    ifstream file;
-    file.open("input.txt");
+    // freopen("input.txt", "r", stdin);
 
-    if (!file.is_open())
-    {
-        cout << "File not found!" << endl;
-        return 0;
-    }
-
-    file >> k >> n >> m;
+    cin >> k >> n >> m;
     for (int i = 0; i < k; ++i)
-        file >> data[i].first >> data[i].second;
+        cin >> data[i].first >> data[i].second;
 
     ans = 0;
     vb visited(k, false);
