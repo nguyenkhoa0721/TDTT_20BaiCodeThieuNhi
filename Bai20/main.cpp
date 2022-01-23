@@ -12,13 +12,13 @@ int k;
 int timChiSo()
 {
     int res = 0;
-    int l = 0;
     for (int i = 0; i < n; i++)
     {
+        int l = 0;
         for (int j = 0; j < i; j++)
             if (a[j] < a[i])
                 l++;
-        res += (gt[n - i - 1] * gt[a[i] - 1 - l]);
+        res += (gt[n - i - 1] * (a[i] - 1 - l));
     }
     return ++res;
 }

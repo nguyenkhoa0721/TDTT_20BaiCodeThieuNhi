@@ -11,7 +11,7 @@ double areaOfIntersection()
 double solution()
 {
     int dis = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-    return dis >= 2 * R ? 0 : 2 * M_PI * R * R - areaOfIntersection();
+    return dis >= 2 * R ? 2 * M_PI * R * R : 2 * M_PI * R * R - areaOfIntersection();
 }
 int main()
 {
